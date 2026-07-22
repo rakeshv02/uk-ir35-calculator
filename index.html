@@ -1,42 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UK IR35 Contractor Calculator 2025/26 – Inside vs Outside IR35 Take-Home | Tabutility</title>
+  <meta name="description" content="Free UK IR35 contractor calculator. Compare inside vs outside IR35 take-home pay from your day rate — 2025/26 tax rates including updated employer NI at 15%." />
+  <meta name="keywords" content="IR35 calculator, contractor take home pay, inside IR35, outside IR35, umbrella company, Ltd company, day rate calculator 2025" />
+  <link rel="canonical" href="https://uk-ir35-calculator.tabutility.com/" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-78VZWJ5B1W"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-78VZWJ5B1W');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7039091592734005" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>*{margin:0;padding:0;box-sizing:border-box;}body{background:#faf5ff;}.site-nav{background:#1a1a2e;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}.site-nav a{color:#a5b4fc;text-decoration:none;font-size:14px;font-family:'Segoe UI',Arial,sans-serif;}.nav-brand{color:#fff;font-weight:700;font-size:16px;font-family:'Segoe UI',Arial,sans-serif;}#ad-top,#ad-bottom{text-align:center;padding:10px;background:#fff;}</style>
+</head>
+<body>
+  <nav class="site-nav"><span class="nav-brand">⚡ Tabutility</span><a href="https://tabutility.com">← All Tools</a></nav>
+  <div id="ad-top"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7039091592734005" data-ad-slot="auto" data-ad-format="horizontal" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+  <div id="root"></div>
+  <div id="ad-bottom"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7039091592734005" data-ad-slot="auto" data-ad-format="rectangle" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+  <script type="text/babel">
+    //<![CDATA[
+    const { useState } = React;
 
-    <!-- ✏️ UPDATE THESE FOR EVERY NEW TOOL -->
-    <title>TOOL NAME — TOOL TAGLINE | Tabutility</title>
-    <meta name="description" content="TOOL DESCRIPTION. No sign-up, runs in your browser." />
-    <meta name="keywords" content="KEYWORD 1, KEYWORD 2, KEYWORD 3, free TOOL NAME" />
-    <link rel="canonical" href="https://SUBDOMAIN.tabutility.com/" />
-    <meta property="og:url" content="https://SUBDOMAIN.tabutility.com/" />
-    <meta property="og:title" content="TOOL NAME — TOOL TAGLINE" />
-    <meta property="og:description" content="TOOL DESCRIPTION. Free, no sign-up." />
-    <meta name="twitter:title" content="TOOL NAME — TOOL TAGLINE" />
-    <meta name="twitter:description" content="TOOL DESCRIPTION. Free, no sign-up." />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>EMOJI</text></svg>" />
-    <!-- ✏️ END OF SECTION TO UPDATE -->
+    const PA = 12570, BASIC_LIMIT = 50270, HIGHER_LIMIT = 125140;
+    const EMPLOYER_NI_RATE = 0.15, EMPLOYER_NI_THRESHOLD = 5000;
+    const CORP_TAX = 0.19, DIV_ALLOWANCE = 500, DIV_TAX_BASIC = 0.0875;
 
-    <!-- DO NOT CHANGE ANYTHING BELOW THIS LINE -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Tabutility" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="robots" content="index, follow" />
+    function calcIncomeTax(income) {
+      let tax = 0;
+      if (income > PA) tax += Math.min(income - PA, BASIC_LIMIT - PA) * 0.20;
+      if (income > BASIC_LIMIT) tax += Math.min(income - BASIC_LIMIT, HIGHER_LIMIT - BASIC_LIMIT) * 0.40;
+      if (income > HIGHER_LIMIT) tax += (income - HIGHER_LIMIT) * 0.45;
+      return Math.max(0, tax);
+    }
+    function calcEmployeeNI(income) {
+      let ni = 0;
+      if (income > PA) ni += Math.min(income - PA, BASIC_LIMIT - PA) * 0.08;
+      if (income > BASIC_LIMIT) ni += (income - BASIC_LIMIT) * 0.02;
+      return Math.max(0, ni);
+    }
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7039091592734005" crossorigin="anonymous"></script>
+    const fmt = n => "£" + Math.round(n).toLocaleString();
+    const pct = n => n.toFixed(1) + "%";
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-78VZWJ5B1W"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-78VZWJ5B1W');
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    function UKIR35Calculator() {
+      const [dayRate, setDayRate] = useState("500");
+      const [daysPerWeek, setDaysPerWeek] = useState("5");
+      const [weeksPerYear, setWeeksPerYear] = useState("46");
+      const [expenses, setExpenses] = useState("2000");
+      const [result, setResult] = useState(null);
+
+      const calculate = () => {
+        const dr = parseFloat(dayRate)||0;
+        const dpw = parseFloat(daysPerWeek)||5;
+        const wpy = parseFloat(weeksPerYear)||46;
+        const annualExpenses = parseFloat(expenses)||0;
+        const contractValue = dr * dpw * wpy;
+        const employerNI = Math.max(0, contractValue - EMPLOYER_NI_THRESHOLD) * EMPLOYER_NI_RATE;
+        const grossEmployment = contractValue - employerNI - annualExpenses;
+        const incomeTaxInside = calcIncomeTax(grossEmployment);
+        const employeeNIInside = calcEmployeeNI(grossEmployment);
+        const takeHomeInside = grossEmployment - incomeTaxInside - employeeNIInside;
+        const ltdSalary = PA;
+        const ltdEmployerNI = Math.max(0, ltdSalary - EMPLOYER_NI_THRESHOLD) * EMPLOYER_NI_RATE;
+        const companyRevenue = contractValue - annualExpenses;
+        const companyProfit = companyRevenue - ltdSalary - ltdEmployerNI;
+        const corpTax = companyProfit > 0 ? companyProfit * CORP_TAX : 0;
+        const dividendsAvailable = Math.max(0, companyProfit - corpTax);
+        const taxableDividends = Math.max(0, dividendsAvailable - DIV_ALLOWANCE);
+        const dividendTax = taxableDividends * DIV_TAX_BASIC;
+        const takeHomeLtd = ltdSalary + dividendsAvailable - dividendTax;
+        const difference = takeHomeLtd - takeHomeInside;
+        setResult({ contractValue, employerNI, grossEmployment, incomeTaxInside, employeeNIInside, takeHomeInside, effectiveRateInside: contractValue > 0 ? (1 - takeHomeInside/contractValue)*100 : 0, ltdSalary, ltdEmployerNI, corpTax, dividendsAvailable, dividendTax, takeHomeLtd, effectiveRateLtd: contractValue > 0 ? (1 - takeHomeLtd/contractValue)*100 : 0, difference, companyProfit });
+      };
+
+      const inputStyle = { width:"100%",padding:"12px",border:"2px solid #e9d5ff",borderRadius:10,fontSize:16,boxSizing:"border-box",outline:"none" };
+      const labelStyle = { display:"block",fontWeight:600,marginBottom:6,color:"#333" };
+
+      return (
+        <div style={{ fontFamily:"'Segoe UI',Arial,sans-serif",background:"#faf5ff",minHeight:"100vh",padding:"20px" }}>
+          <div style={{ maxWidth:820,margin:"0 auto" }}>
+            <div style={{ textAlign:"center",marginBottom:32 }}>
+              <div style={{ fontSize:48,marginBottom:8 }}>🏢</div>
+              <h1 style={{ margin:0,fontSize:32,fontWeight:800,color:"#1a1a2e" }}>UK IR35 / Contractor Calculator</h1>
+              <p style={{ margin:"8px 0 0",color:"#555",fontSize:16 }}>Inside vs outside IR35 take-home pay — 2025/26 (15% employer NI)</p>
+            </div>
+            <div style={{ background:"#fff",borderRadius:16,padding:28,boxShadow:"0 4px 24px rgba(0,0,0,0.08)",marginBottom:24 }}>
+              <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(200px,1fr))",gap:20 }}>
+                {[
+                  { label:"Day Rate (£)", value:dayRate, set:setDayRate, prefix:"£" },
+                  { label:"Days Per Week", value:daysPerWeek, set:setDaysPerWeek },
+                  { label:"Billable Weeks Per Year", value:weeksPerYear, set:setWeeksPerYear },
+                  { label:"Annual Expenses (£)", value:expenses, set:setExpenses, prefix:"£" },
+                ].map(({ label, value, set, prefix }) => (
+                  <div key={label}>
+                    <label style={labelStyle}>{label}</label>
+                    <div style={{ position:"relative" }}>
+                      {prefix && <span style={{ position:"absolute",left:12,top:"50%",transform:"translateY(-50%)",color:"#666",fontWeight:600 }}>{prefix}</span>}
+                      <input type="number" value={value} onChange={e=>set(e.target.value)} style={{...inputStyle,paddingLeft:prefix?28:12}} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button onClick={calculate} style={{ width:"100%",marginTop:24,padding:"16px",background:"linear-gradient(135deg, #7c3aed, #6d28d9)",color:"#fff",border:"none",borderRadius:12,fontSize:18,fontWeight:700,cursor:"pointer" }}>Compare IR35 vs Ltd Company</button>
+            </div>
+            {result && <>
+              <div style={{ background:"#fff",borderRadius:16,padding:24,boxShadow:"0 2px 12px rgba(0,0,0,0.06)",marginBottom:24 }}>
+                <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16,flexWrap:"wrap",gap:12 }}>
+                  <h3 style={{ margin:0,fontSize:18,fontWeight:800,color:"#1a1a2e" }}>Annual Contract: {fmt(result.contractValue)}</h3>
+                  <div style={{ background:result.difference>=0?"#ebfbee":"#fff5f5",border:`2px solid ${result.difference>=0?"#2f9e44":"#e03131"}`,borderRadius:10,padding:"8px 16px",fontWeight:700,color:result.difference>=0?"#2f9e44":"#e03131" }}>
+                    Ltd Company {result.difference>=0?"+":""}{fmt(result.difference)}/yr better
+                  </div>
+                </div>
+                <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:20 }}>
+                  {[
+                    { title:"🏢 Inside IR35 (Umbrella)", color:"#e03131", bg:"#fff5f5", rows:[
+                      { label:"Contract Value", value:fmt(result.contractValue) },
+                      { label:"Employer NI (15%)", value:`−${fmt(result.employerNI)}` },
+                      { label:"Gross Employment Income", value:fmt(result.grossEmployment), bold:true },
+                      { label:"Income Tax", value:`−${fmt(result.incomeTaxInside)}` },
+                      { label:"Employee NI (8%)", value:`−${fmt(result.employeeNIInside)}` },
+                      { label:"Take-Home", value:fmt(result.takeHomeInside), bold:true, color:"#e03131" },
+                      { label:"Effective Tax Rate", value:pct(result.effectiveRateInside), color:"#888" },
+                    ]},
+                    { title:"✅ Outside IR35 (Ltd Company)", color:"#2f9e44", bg:"#ebfbee", rows:[
+                      { label:"Contract Value", value:fmt(result.contractValue) },
+                      { label:"Salary (at PA £12,570)", value:`−${fmt(result.ltdSalary)}` },
+                      { label:"Employer NI", value:`−${fmt(result.ltdEmployerNI)}` },
+                      { label:"Company Profit", value:fmt(result.companyProfit), bold:true },
+                      { label:"Corporation Tax (19%)", value:`−${fmt(result.corpTax)}` },
+                      { label:"Dividends Available", value:fmt(result.dividendsAvailable) },
+                      { label:"Dividend Tax (8.75%)", value:`−${fmt(result.dividendTax)}` },
+                      { label:"Take-Home", value:fmt(result.takeHomeLtd), bold:true, color:"#2f9e44" },
+                      { label:"Effective Tax Rate", value:pct(result.effectiveRateLtd), color:"#888" },
+                    ]},
+                  ].map((col,ci) => (
+                    <div key={ci} style={{ background:col.bg,borderRadius:14,padding:20,border:`2px solid ${col.color}33` }}>
+                      <h4 style={{ margin:"0 0 14px",fontSize:15,fontWeight:800,color:col.color }}>{col.title}</h4>
+                      {col.rows.map((row,i) => (
+                        <div key={i} style={{ display:"flex",justifyContent:"space-between",padding:"7px 0",borderTop:"1px solid rgba(0,0,0,0.06)" }}>
+                          <span style={{ fontSize:13,color:"#555",fontWeight:row.bold?700:400 }}>{row.label}</span>
+                          <span style={{ fontSize:13,fontWeight:row.bold?700:500,color:row.color||"#222" }}>{row.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div style={{ background:"#fff3cd",border:"1px solid #ffc107",borderRadius:12,padding:16,fontSize:13,color:"#664d03" }}>
+                <strong>Assumptions:</strong> Outside IR35 — optimal salary at personal allowance (£12,570), remaining profit as dividends, basic rate dividend tax (8.75%), corp tax 19%. From April 2025 employer NI is 15% with £5,000 secondary threshold. Does not model pension, umbrella fees or accountancy costs.
+              </div>
+            </>}
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<UKIR35Calculator />);
+    //]]>
+  </script>
+</body>
 </html>
