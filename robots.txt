@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://uk-ir35-calculator.tabutility.com/sitemap.xml
